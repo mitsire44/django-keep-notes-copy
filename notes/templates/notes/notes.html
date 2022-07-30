@@ -1,0 +1,17 @@
+{% extends 'notes/base.html' %}
+
+{% block content %}
+
+hello, heres all the notes
+<br>
+
+{% for note in notes %}
+   <p style="color:{{ note.colour }}"><a href="{% url 'viewnote' note.id %}"> {{ note.title }}</a> -
+    {{ note.desc }}
+
+</p>
+{{ note.date }}
+
+{% endfor %}
+
+{% endblock %}

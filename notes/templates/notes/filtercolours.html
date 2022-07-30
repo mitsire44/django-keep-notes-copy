@@ -1,0 +1,27 @@
+{% extends 'notes/base.html' %}
+
+{% block content %}
+
+{% if notes %}
+
+hello, heres all the {{ colour }} notes
+<br>
+
+{% for note in notes %}
+   <p style="color:{{ note.colour }}"><a href="{% url 'viewnote' note.id %}"> {{ note.title }}</a> -
+    {{ note.desc }}
+</p>
+
+{% endfor %}
+
+{% else %}
+
+No {{ colour }} notes found sadge
+
+
+{% endif %}
+
+
+
+{% endblock %}
+

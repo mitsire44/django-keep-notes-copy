@@ -1,0 +1,23 @@
+{% extends 'notes/base.html' %}
+
+{% block content %}
+
+<br>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type='submit'>Save</button>
+</form>
+
+
+<form method="POST" action="{% url 'deletenote' fullnote.id %}">
+    {% csrf_token %}
+    <button type='submit'>Delete</button>
+</form>
+
+
+
+
+{% endblock %}
+

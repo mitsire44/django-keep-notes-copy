@@ -1,0 +1,38 @@
+{% if user.is_authenticated %}
+Welcome, {{ user.username }}
+
+<form action="{% url 'logoutuser' %}" method='POST'>
+{% csrf_token %}
+<button type='submit'>Logout</button>
+
+</form>
+<a href="{% url 'createnote' %}"> Create Note </a>
+<br>
+<a href="{% url 'notes' %}"> View All Notes </a>
+<br>
+Filter by colours
+<form method="POST" action="{% url 'filtercolours' %}">
+    {% csrf_token %}
+    <select name='colour'>
+        <option value='Azure'>Default</option>
+        <option value='Yellow'>Yellow</option>
+        <option value='Orange'>Orange</option>
+        <option value='Salmon'>Salmon</option>
+        <option value='Aqua'>Cyan</option>
+        <option value='Chartreuse'>Lime Green</option>
+        <option value='Gray'>Gray</option>
+    </select>
+
+    <button type="submit"> Filter </button>
+</form>
+
+{% else %}
+<a href="{% url 'signupuser' %}"> Sign Up </a>
+<a href="{% url 'loginuser' %}"> Login </a>
+
+{% endif %}
+
+<br>
+
+{% block content %}
+{% endblock %}

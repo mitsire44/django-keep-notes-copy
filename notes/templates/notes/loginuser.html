@@ -1,0 +1,14 @@
+<a href="{% url 'signupuser' %}"> Sign Up </a>
+
+<h1>Log In</h1>
+
+<h2>{{ error }}</h2>
+
+<form method="POST">
+
+{% csrf_token %}
+{{ form }}
+<button type="submit">Log In</button><br>
+</form>
+
+
