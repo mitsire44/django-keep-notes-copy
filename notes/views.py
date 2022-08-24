@@ -5,6 +5,7 @@ from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
 from .forms import NoteForm
 from .models import note
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def home(request):
@@ -39,14 +40,17 @@ def loginuser(request):
             login(request, user)
             return redirect('notes')
 
+@login_required
 def logoutuser(request):
     logout(request)
     return redirect('home')
 
+@login_required
 def notes(request):
     notes = note.objects.filter(user = request.user)
     return render(request, 'notes/notes.html', {'notes':notes})
 
+@login_required
 def createnote(request):
         if request.method=="GET":
             return render(request, 'notes/createnote.html', {'form':NoteForm()})
@@ -57,6 +61,7 @@ def createnote(request):
             newNote.save()
             return redirect('notes')
 
+@login_required
 def viewnote(request, note_pk):
     fullnote=get_object_or_404(note, pk=note_pk, user=request.user)
     if request.method=='GET':
@@ -67,6 +72,7 @@ def viewnote(request, note_pk):
         form.save()
         return redirect('notes')
 
+@login_required
 def search(request):
     if request.method=="POST":
         searched = request.POST['searched']
@@ -75,7 +81,7 @@ def search(request):
     else:
         return render(request, 'reviews/searchresultsrework.html', {})
 
-
+@login_required
 def filtercolours(request):
     if request.method=="POST":
         colour = request.POST['colour']
@@ -84,7 +90,7 @@ def filtercolours(request):
     else:
         return render(request, 'notes/filtercolours.html', {})
 
-
+@login_required
 def deletenote(request, note_pk):
     fullnote=get_object_or_404(note, pk=note_pk, user=request.user)
     if request.method=='POST':

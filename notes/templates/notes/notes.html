@@ -2,16 +2,49 @@
 
 {% block content %}
 
-hello, heres all the notes
-<br>
+Filter by colours
+<form method="POST" action="{% url 'filtercolours' %}">
+    {% csrf_token %}
+    <select name='colour'>
+        <option value='Azure'>Default</option>
+        <option value='Yellow'>Yellow</option>
+        <option value='Orange'>Orange</option>
+        <option value='Salmon'>Salmon</option>
+        <option value='Aqua'>Cyan</option>
+        <option value='Chartreuse'>Lime Green</option>
+        <option value='Gray'>Gray</option>
+    </select>
 
-{% for note in notes %}
-   <p style="color:{{ note.colour }}"><a href="{% url 'viewnote' note.id %}"> {{ note.title }}</a> -
+    <button type="submit"> Filter </button>
+</form>
+
+
+<div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+        {% if notes %}
+            <div class="list-group">
+                {% for note in notes %}
+
+ <a href="{% url 'viewnote' note.id %}">
+    <p style="color:{{ note.colour }}"><a href="{% url 'viewnote' note.id %}"> {{ note.title }}  -  {{ note.date|date:'M j Y' }}</a> -
     {{ note.desc }}
-
 </p>
-{{ note.date }}
 
-{% endfor %}
+</a>
+
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center">
+                <h2>Looks like you don't have any notes!.</h2>
+            <br>
+            <a role="button" class="btn btn-primary" href="{% url 'createnote' %}">Add Note</a>
+            </div>
+        {% endif %}
+        </div>
+    </div>
+
+
 
 {% endblock %}
+

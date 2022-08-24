@@ -1,7 +1,20 @@
-{% extends 'notes/base.html' %}
+
+{% extends "notes/base.html" %}
 
 {% block content %}
+<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+<div class="row justify-content-center mt-5">
+        <div class="col-md-7 text-center">
 
-home
+                 <h1>Google Keep Clone</h1>
+            <p>Since I make a lot of notes for all the interesting stuff I encounter in my daily life or just write down ideas for future projects I decided to make a clone of google keep itself. It was completely made in django and I used some bootstrap classes for the UI. Enjoy!</p>
+        <a role="button" class="btn btn-warning btn-lg" href="{% url 'signupuser' %}">Start</a>
+        </div>
+    </div>
 
 {% endblock %}
